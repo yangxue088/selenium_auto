@@ -20,19 +20,16 @@ browser.get('http://sale.chinasalestore.com/wish/SelectItem.aspx')
 
 reader = csv.reader(open("input/css_select.csv"))
 
-for idx, item in enumerate(reader):
+idx = 0
 
-    sku, price = item
+for sku, price in reader:
 
     try:
 
-        # if idx % 2 == 0:
-        #     account = 'KEHAN'
-        # else:
-        #     account = 'RUIERSI'
-
-
-        account = 'RUIERSI'
+        if idx % 2 == 0:
+            account = 'KEHAN'
+        else:
+            account = 'RUIERSI'
 
         Select(browser.find_element(By.ID, 'txtaccount')).select_by_visible_text(account)
 
@@ -49,7 +46,15 @@ for idx, item in enumerate(reader):
 
         wait.until(expected_conditions.element_to_be_clickable((By.NAME, 'radioSelect')))
 
+        risks = browser.find_elements(By.XPATH, "//td/span")
+
+        if len(risks) > 0:
+            print 'account: {}, sku: {}, 自动忽略, 存在风险: {}'.format(account, sku, risks[0].text)
+            continue
+
         browser.find_element(By.NAME, 'radioSelect').click()
+
+        wait.until(expected_conditions.invisibility_of_element_located(()))
 
         browser.switch_to.default_content()
 
@@ -70,7 +75,7 @@ for idx, item in enumerate(reader):
 
             browser.execute_script('''$('#dg').datagrid('endEdit', {})'''.format(i))
 
-        # is_kanden = input('account: {}, sku: {}, 是否刊登?'.format(account, sku))
+        is_kanden = input('account: {}, sku: {}, 是否刊登?'.format(account, sku))
 
         is_kanden = 1
 
@@ -87,12 +92,13 @@ for idx, item in enumerate(reader):
             browser.find_element(By.XPATH, "//span[contains(text(), '确定')]").click()
 
             if '刊登成功' in text:
+                idx += 1
                 print 'account: {}, sku: {}, 上传结果: 成功, 反馈: {}'.format(account, sku, text)
             elif '重复刊登' in text:
                 print 'account: {}, sku: {}, 上传结果: 失败, 反馈: 重复刊登'.format(account, sku)
         else:
 
-            print 'account: {}, sku: {}, 选择了忽略'.format(sku)
+            print 'account: {}, sku: {}, 选择了忽略'.format(account, sku)
 
     except:
 
