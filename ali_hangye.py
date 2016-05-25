@@ -11,10 +11,6 @@ browser.get('https://login.aliexpress.com/')
 
 input("登录完成了请输入")
 
-# browser.find_element(value='fm-login-id').send_keys('shawnxiao2015@outlook.com')
-# browser.find_element(value='fm-login-password').send_keys('TJ$shawn2016')
-# browser.find_element(value='fm-login-password').submit()
-
 with open("input/ali_hangye.csv") as file:
     for url in csv.reader(file):
 
