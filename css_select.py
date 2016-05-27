@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import csv
 import sys
+from collections import OrderedDict
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -30,7 +31,7 @@ browser.find_element(By.XPATH, "//input[@name='Battery' and @value='0']").click(
 
 all_sku = set()
 
-select_sku = {}
+select_sku = OrderedDict()
 
 with open('input/css_all.csv') as file:
     for sku, price, in csv.reader(file):

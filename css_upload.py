@@ -50,6 +50,7 @@ for sku, price in reader:
 
         if len(risks) > 0:
             print 'account: {}, sku: {}, 自动忽略, 存在风险: {}'.format(account, sku, risks[0].text)
+            browser.get('http://sale.chinasalestore.com/wish/SelectItem.aspx')
             continue
 
         browser.find_element(By.NAME, 'radioSelect').click()

@@ -91,4 +91,6 @@ ENV/
 
 .idea/
 
-.input/
+input/
+
+output/
