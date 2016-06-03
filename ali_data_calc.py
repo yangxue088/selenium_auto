@@ -40,13 +40,13 @@ def calc_data(*ds):
             '{}%'.format(reduce(operator.mul, [(float(d[1][:-1]) / 100) for d in ds if len(d) > 0], 1) * 100),
             '{}%'.format(reduce(operator.mul, [(float(d[2][:-1]) / 100) for d in ds if len(d) > 0], 1) * 100),
             '{}%'.format(reduce(operator.mul, [(float(d[3][:-1]) / 100) for d in ds if len(d) > 0], 1) * 100),
-            '{}%'.format(reduce(operator.mul, [(float(d[4][:-1]) / 100) for d in ds if len(d) > 0], 1) * 100),)
+            [d[4] for d in ds if len(d) > 0][-1])
 
 
-with open('output/ali_lanhai_result.csv', 'w') as ofile:
+with open('output/ali_test_result.csv', 'w') as ofile:
     writer = csv.writer(ofile)
 
-    with open('input/ali_lanhai.csv') as file:
+    with open('input/ali_industry.csv') as file:
         for one_text, two_text, three_text, four_text in csv.reader(file):
 
             try:

@@ -2,6 +2,7 @@
 import csv
 import sys
 
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
@@ -66,6 +67,11 @@ for sku, price in reader:
         browser.find_element(By.ID, 'Shipendtime').clear()
         browser.find_element(By.ID, 'Shipendtime').send_keys('21')
 
+        # browser.find_element(By.ID, 'txtShipping').clear()
+        # browser.find_element(By.ID, 'txtShipping').send_keys('2')
+
+        browser.execute_script('''$('#txtShipping').val('{}')'''.format(2))
+
         row_count = browser.execute_script('''return $('#dg').datagrid('getData').total''')
 
         for i in xrange(row_count):
@@ -76,7 +82,7 @@ for sku, price in reader:
 
             browser.execute_script('''$('#dg').datagrid('endEdit', {})'''.format(i))
 
-        is_kanden = input('account: {}, sku: {}, 是否刊登?'.format(account, sku))
+        # is_kanden = input('account: {}, sku: {}, 是否刊登?'.format(account, sku))
 
         is_kanden = 1
 

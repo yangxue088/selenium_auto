@@ -64,7 +64,7 @@ with open('input/css_all.csv') as file:
                 print 'sku: {}, 选择了上传'.format(sku)
                 select_sku[sku] = price
 
-                if len(select_sku) == 40:
+                if len(select_sku) == 60:
                     print '最后一个上传的sku: {}'.format(sku)
                     break
 

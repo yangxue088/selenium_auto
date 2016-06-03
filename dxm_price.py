@@ -24,13 +24,13 @@ with open("input/dxm_price.csv") as file:
         new_prices = []
 
         try:
-            wait = WebDriverWait(browser, 60)
+            wait = WebDriverWait(browser, 120)
 
             browser.find_elements_by_xpath("//div[@class='col-xs-10 pTop10']/a[contains(text(),'产品ID')]")[0].click()
 
             wait.until(expected_conditions.invisibility_of_element_located((By.XPATH, "//body[contains(@class, 'modal-open')]")))
 
-            browser.find_elements_by_xpath("//div[@class='col-xs-10 pTop10']/a[contains(text(),'KEHAN')]")[0].click()
+            browser.find_elements_by_xpath("//div[@class='col-xs-10 pTop10']/a[contains(text(),'RUIERSI')]")[0].click()
 
             wait.until(expected_conditions.invisibility_of_element_located((By.XPATH, "//body[contains(@class, 'modal-open')]")))
 
